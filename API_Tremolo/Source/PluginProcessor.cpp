@@ -9,9 +9,9 @@ API_TremoloAudioProcessor::API_TremoloAudioProcessor():
     AudioProcessor (BusesProperties()
                     #if ! JucePlugin_IsMidiEffect
                      #if ! JucePlugin_IsSynth
-                      .withInput  ("Input",  AudioChannelSet::stereo(), true)
+                      .withInput  ("Input", juce::AudioChannelSet::stereo(), true)
                      #endif
-                      .withOutput ("Output", AudioChannelSet::stereo(), true)
+                      .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                     #endif
                    ),
 #endif
@@ -172,8 +172,8 @@ bool API_TremoloAudioProcessor::isBusesLayoutSupported (const BusesLayout& layou
   #else
     // This is the place where you check if the layout is supported.
     // In this template code we only support mono or stereo.
-    if (layouts.getMainOutputChannelSet() != AudioChannelSet::mono()
-     && layouts.getMainOutputChannelSet() != AudioChannelSet::stereo())
+    if (layouts.getMainOutputChannelSet() != juce::AudioChannelSet::mono()
+     && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
         return false;
 
     // This checks if the input layout matches the output layout

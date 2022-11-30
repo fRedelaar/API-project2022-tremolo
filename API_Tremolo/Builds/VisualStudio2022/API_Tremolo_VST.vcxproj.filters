@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="JUCE Modules\juce_audio_plugin_client\VST">
@@ -18,6 +19,9 @@
     <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\VST\juce_VST_Wrapper.cpp">
       <Filter>JUCE Modules\juce_audio_plugin_client\VST</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\VST\juce_VST_Wrapper.mm">
+      <Filter>JUCE Modules\juce_audio_plugin_client\VST</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\juce_audio_plugin_client_VST2.cpp">
       <Filter>JUCE Modules\juce_audio_plugin_client</Filter>
     </ClCompile>
@@ -25,7 +29,7 @@
       <Filter>JUCE Library Code</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup/>
   <ItemGroup>
     <ResourceCompile Include=".\resources.rc">
       <Filter>JUCE Library Code</Filter>
