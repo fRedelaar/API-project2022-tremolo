@@ -138,26 +138,27 @@ float API_TremoloAudioProcessor::lfo(float phase, int waveform)
 
 void API_TremoloAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    std::unique_ptr<juce::XmlElement> xml (parameters.valueTreeState.state.createXml());
+    auto state = parameters.valueTreeState.copyState();
+    std::unique_ptr<juce::XmlElement> xml(state.createXml());
     copyXmlToBinary (*xml, destData);
 }
 
 void API_TremoloAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    std::unique_ptr<juce::XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
-    if (xmlState != nullptr)
-        if (xmlState->hasTagName (parameters.valueTreeState.state.getType()))
-            parameters.valueTreeState.state = juce::ValueTree::fromXml (*xmlState);
+    std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
+    if (xmlState.get() != nullptr)
+        if (xmlState->hasTagName(parameters.valueTreeState.state.getType()))
+                parameters.valueTreeState.replaceState(juce::ValueTree::fromXml(*xmlState));
+}
+
+juce::AudioProcessorEditor* API_TremoloAudioProcessor::createEditor()
+{
+    return new API_API_TremoloAudioProcessorEditor(*this);
 }
 
 bool API_TremoloAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
-}
-
-juce::AudioProcessorEditor* API_TremoloAudioProcessor::createEditor()
-{
-    return new API_API_TremoloAudioProcessorEditor (*this);
 }
 
 

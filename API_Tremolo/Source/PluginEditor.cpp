@@ -8,7 +8,7 @@
 API_API_TremoloAudioProcessorEditor::API_API_TremoloAudioProcessorEditor (API_TremoloAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
-    const juce::Array<juce::AudioProcessorParameter*>& parameters = processor.getParameters();
+    const juce::Array<juce::AudioProcessorParameter*> parameters = processor.getParameters();
     int comboBoxCounter = 0;
 
     int editorHeight = 2 * editorMargin;
