@@ -22,7 +22,7 @@ API_TremoloAudioProcessor::API_TremoloAudioProcessor():
     , paramFrequency(parameters, "LFO Frequency", "Hz", 0.0f, 10.0f, 2.0f)
     , paramWaveform(parameters, "LFO Waveform", waveformItemsUI, waveformSine)
 {
-    parameters.valueTreeState.state = juce::ValueTree (juce::Identifier (getName().removeCharacters ("- ")));
+    parameters.apvts.state = juce::ValueTree (juce::Identifier (getName().removeCharacters ("- ")));
 }
 
 API_TremoloAudioProcessor::~API_TremoloAudioProcessor()
@@ -138,7 +138,7 @@ float API_TremoloAudioProcessor::lfo(float phase, int waveform)
 
 void API_TremoloAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    auto state = parameters.valueTreeState.copyState();
+    auto state = parameters.apvts.copyState();
     std::unique_ptr<juce::XmlElement> xml(state.createXml());
     copyXmlToBinary (*xml, destData);
 }
@@ -147,8 +147,8 @@ void API_TremoloAudioProcessor::setStateInformation (const void* data, int sizeI
 {
     std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
     if (xmlState.get() != nullptr)
-        if (xmlState->hasTagName(parameters.valueTreeState.state.getType()))
-                parameters.valueTreeState.replaceState(juce::ValueTree::fromXml(*xmlState));
+        if (xmlState->hasTagName(parameters.apvts.state.getType()))
+                parameters.apvts.replaceState(juce::ValueTree::fromXml(*xmlState));
 }
 
 juce::AudioProcessorEditor* API_TremoloAudioProcessor::createEditor()

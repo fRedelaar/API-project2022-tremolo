@@ -58,7 +58,7 @@ public:
         waveformSine = 0,
         waveformTriangle,
         waveformSawtooth,
-        waveformInverseSawtooth,
+        waveformInverseSawtooth, change
         waveformSquare,
         waveformSquareSlopedEdges,
     };

@@ -7,11 +7,11 @@ using Parameter = juce::AudioProcessorValueTreeState::Parameter;
 class PluginParametersManager
 {
 public:
-    PluginParametersManager(juce::AudioProcessor& p) : valueTreeState(p, nullptr)
+    PluginParametersManager(juce::AudioProcessor& p) : apvts(p, nullptr)
     {
     }
 
-    juce::AudioProcessorValueTreeState valueTreeState;
+    juce::AudioProcessorValueTreeState apvts;
     juce::StringArray parameterTypes;
     juce::Array<juce::StringArray> comboBoxItemLists;
 };
@@ -76,13 +76,13 @@ protected:
         if (logarithmic)
             range.setSkewForCentre(sqrt(minValue * maxValue));
 
-        parametersManager.valueTreeState.createAndAddParameter(std::make_unique<Parameter>
+        parametersManager.apvts.createAndAddParameter(std::make_unique<Parameter>
             (paramID, paramName, labelText, range, defaultValue,
                 [](float value) { return juce::String(value, 2); },
                 [](const juce::String& text) { return text.getFloatValue(); })
         );
 
-        parametersManager.valueTreeState.addParameterListener(paramID, this);
+        parametersManager.apvts.addParameterListener(paramID, this);
         updateValue(defaultValue);
     }
 
@@ -161,13 +161,13 @@ public:
         const juce::StringArray toggleStates = { "False", "True" };
         juce::NormalisableRange<float> range(0.0f, 1.0f, 1.0f);
 
-        parametersManager.valueTreeState.createAndAddParameter(std::make_unique<Parameter>
+        parametersManager.apvts.createAndAddParameter(std::make_unique<Parameter>
             (paramID, paramName, "", range, (float)defaultState,
                 [toggleStates](float value) { return toggleStates[(int)value]; },
                 [toggleStates](const juce::String& text) { return toggleStates.indexOf(text); })
         );
 
-        parametersManager.valueTreeState.addParameterListener(paramID, this);
+        parametersManager.apvts.addParameterListener(paramID, this);
         updateValue((float)defaultState);
     }
 
@@ -196,13 +196,13 @@ public:
         parametersManager.comboBoxItemLists.add(items);
         juce::NormalisableRange<float> range(0.0f, (float)items.size() - 1.0f, 1.0f);
 
-        parametersManager.valueTreeState.createAndAddParameter(std::make_unique<Parameter>
+        parametersManager.apvts.createAndAddParameter(std::make_unique<Parameter>
             (paramID, paramName, "", range, (float)defaultChoice,
                 [items](float value) { return items[(int)value]; },
                 [items](const juce::String& text) { return items.indexOf(text); })
         );
 
-        parametersManager.valueTreeState.addParameterListener(paramID, this);
+        parametersManager.apvts.addParameterListener(paramID, this);
         updateValue((float)defaultChoice);
     }
 
