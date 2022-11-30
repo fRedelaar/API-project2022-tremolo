@@ -5,7 +5,7 @@
 
 //==============================================================================
 
-API_API_TremoloAudioProcessorEditor::API_API_TremoloAudioProcessorEditor (API_TremoloAudioProcessor& p)
+API_TremoloAudioProcessorEditor::API_TremoloAudioProcessorEditor (API_TremoloAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
     const juce::Array<juce::AudioProcessorParameter*> parameters = processor.getParameters();
@@ -84,18 +84,18 @@ API_API_TremoloAudioProcessorEditor::API_API_TremoloAudioProcessorEditor (API_Tr
     setSize (editorWidth, editorHeight);
 }
 
-API_API_TremoloAudioProcessorEditor::~API_API_TremoloAudioProcessorEditor()
+API_TremoloAudioProcessorEditor::~API_TremoloAudioProcessorEditor()
 {
 }
 
 //==============================================================================
 
-void API_API_TremoloAudioProcessorEditor::paint (juce::Graphics& g)
+void API_TremoloAudioProcessorEditor::paint (juce::Graphics& g)
 {
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 }
 
-void API_API_TremoloAudioProcessorEditor::resized()
+void API_TremoloAudioProcessorEditor::resized()
 {
     juce::Rectangle<int> r = getLocalBounds().reduced (editorMargin);
     r = r.removeFromRight (r.getWidth() - labelWidth);

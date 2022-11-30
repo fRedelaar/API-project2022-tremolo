@@ -6,13 +6,13 @@
 
 //==============================================================================
 
-class API_API_TremoloAudioProcessorEditor : public juce::AudioProcessorEditor
+class API_TremoloAudioProcessorEditor : public juce::AudioProcessorEditor
 {
 public:
     //==============================================================================
 
-    API_API_TremoloAudioProcessorEditor (API_TremoloAudioProcessor&);
-    ~API_API_TremoloAudioProcessorEditor();
+    API_TremoloAudioProcessorEditor (API_TremoloAudioProcessor&);
+    ~API_TremoloAudioProcessorEditor();
 
     //==============================================================================
 
@@ -56,5 +56,5 @@ private:
 
     //==============================================================================
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (API_API_TremoloAudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (API_TremoloAudioProcessorEditor)
 };

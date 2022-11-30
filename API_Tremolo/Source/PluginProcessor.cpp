@@ -153,7 +153,7 @@ void API_TremoloAudioProcessor::setStateInformation (const void* data, int sizeI
 
 juce::AudioProcessorEditor* API_TremoloAudioProcessor::createEditor()
 {
-    return new API_API_TremoloAudioProcessorEditor(*this);
+    return new API_TremoloAudioProcessorEditor(*this);
 }
 
 bool API_TremoloAudioProcessor::hasEditor() const
