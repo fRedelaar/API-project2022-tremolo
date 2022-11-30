@@ -1,51 +1,60 @@
-/*
-  ==============================================================================
 
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
 
 #pragma once
 
-#include <JuceHeader.h>
+#include "JuceHeader.h"
+#include "PluginParameter.h"
 
 //==============================================================================
-/**
-*/
-class API_TremoloAudioProcessor  : public juce::AudioProcessor
-                            #if JucePlugin_Enable_ARA
-                             , public juce::AudioProcessorARAExtension
-                            #endif
+
+class API_TremoloAudioProcessor : public juce::AudioProcessor
 {
 public:
     //==============================================================================
+
     API_TremoloAudioProcessor();
-    ~API_TremoloAudioProcessor() override;
+    ~API_TremoloAudioProcessor();
 
     //==============================================================================
+
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
+    void processBlock (juce::AudioSampleBuffer&, juce::MidiBuffer&) override;
+
+    //==============================================================================
+
+
+
+
+
+
+    //==============================================================================
+
+    void getStateInformation (juce::MemoryBlock& destData) override;
+    void setStateInformation (const void* data, int sizeInBytes) override;
+
+    //==============================================================================
+
+    juce::AudioProcessorEditor* createEditor() override;
+    bool hasEditor() const override;
+
+    //==============================================================================
 
    #ifndef JucePlugin_PreferredChannelConfigurations
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
    #endif
 
-    void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
-
     //==============================================================================
-    juce::AudioProcessorEditor* createEditor() override;
-    bool hasEditor() const override;
 
-    //==============================================================================
     const juce::String getName() const override;
 
     bool acceptsMidi() const override;
     bool producesMidi() const override;
-    bool isMidiEffect() const override;
+    bool isMidiEffect () const override;
     double getTailLengthSeconds() const override;
 
     //==============================================================================
+
     int getNumPrograms() override;
     int getCurrentProgram() override;
     void setCurrentProgram (int index) override;
@@ -53,10 +62,23 @@ public:
     void changeProgramName (int index, const juce::String& newName) override;
 
     //==============================================================================
-    void getStateInformation (juce::MemoryBlock& destData) override;
-    void setStateInformation (const void* data, int sizeInBytes) override;
+
+
+
+
+
+
+    //==============================================================================
+
+    PluginParametersManager parameters;
+
+    PluginParameterLinSlider parameter1;
+    PluginParameterLinSlider parameter2;
+    PluginParameterToggle parameter3;
+    PluginParameterComboBox parameter4;
 
 private:
     //==============================================================================
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (API_TremoloAudioProcessor)
 };

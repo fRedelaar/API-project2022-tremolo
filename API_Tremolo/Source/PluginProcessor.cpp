@@ -1,27 +1,29 @@
-/*
-  ==============================================================================
 
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "PluginParameter.h"
 
 //==============================================================================
-API_TremoloAudioProcessor::API_TremoloAudioProcessor()
+
+API_TremoloAudioProcessor::API_TremoloAudioProcessor():
 #ifndef JucePlugin_PreferredChannelConfigurations
-     : AudioProcessor (BusesProperties()
-                     #if ! JucePlugin_IsMidiEffect
-                      #if ! JucePlugin_IsSynth
-                       .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                      #endif
-                       .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
+    AudioProcessor (BusesProperties()
+                    #if ! JucePlugin_IsMidiEffect
+                     #if ! JucePlugin_IsSynth
+                      .withInput  ("Input",  AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                      .withOutput ("Output", AudioChannelSet::stereo(), true)
+                    #endif
+                   ),
 #endif
+    parameters (*this)
+    , parameter1 (parameters, "Parameter 1", "", 0.0f, 1.0f, 0.5f, [](float value){ return value * 127.0f; })
+    , parameter2 (parameters, "Parameter 2", "", 0.0f, 1.0f, 0.5f)
+    , parameter3 (parameters, "Parameter 3", false, [](float value){ return value * (-2.0f) + 1.0f; })
+    , parameter4 (parameters, "Parameter 4", {"Option A", "Option B"}, 1)
 {
+    parameters.valueTreeState.state = juce::ValueTree (juce::Identifier (getName().removeCharacters ("- ")));
 }
 
 API_TremoloAudioProcessor::~API_TremoloAudioProcessor()
@@ -29,6 +31,130 @@ API_TremoloAudioProcessor::~API_TremoloAudioProcessor()
 }
 
 //==============================================================================
+
+void API_TremoloAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+{
+    const double smoothTime = 1e-3;
+    parameter1.reset (sampleRate, smoothTime);
+    parameter2.reset (sampleRate, smoothTime);
+    parameter3.reset (sampleRate, smoothTime);
+    parameter4.reset (sampleRate, smoothTime);
+}
+
+void API_TremoloAudioProcessor::releaseResources()
+{
+}
+
+void API_TremoloAudioProcessor::processBlock (juce::AudioSampleBuffer& buffer, juce::MidiBuffer& midiMessages)
+{
+    juce::ScopedNoDenormals noDenormals;
+
+    const int numInputChannels = getTotalNumInputChannels();
+    const int numOutputChannels = getTotalNumOutputChannels();
+    const int numSamples = buffer.getNumSamples();
+
+    //======================================
+
+    float currentParameter2 = parameter2.getNextValue();
+    float currentParameter3 = parameter3.getNextValue();
+    float currentParameter4 = parameter4.getNextValue();
+
+    float factor = currentParameter2 * currentParameter3 * currentParameter4;
+
+    for (int channel = 0; channel < numInputChannels; ++channel) {
+        float* channelData = buffer.getWritePointer (channel);
+
+        for (int sample = 0; sample < numSamples; ++sample) {
+            const float in = channelData[sample];
+            float out = in * factor;
+
+            channelData[sample] = out;
+        }
+    }
+
+    for (int channel = numInputChannels; channel < numOutputChannels; ++channel)
+        buffer.clear (channel, 0, numSamples);
+
+    //======================================
+
+    juce::MidiBuffer processedMidi;
+    juce::MidiMessage message;
+    int time;
+
+    for (juce::MidiBuffer::Iterator iter (midiMessages); iter.getNextEvent (message, time);) {
+        if (message.isNoteOn()) {
+            juce::uint8 newVel = (juce::uint8)(parameter1.getTargetValue());
+            message = juce::MidiMessage::noteOn (message.getChannel(), message.getNoteNumber(), newVel);
+        }
+        processedMidi.addEvent (message, time);
+    }
+
+    midiMessages.swapWith (processedMidi);
+}
+
+//==============================================================================
+
+
+
+
+
+
+//==============================================================================
+
+void API_TremoloAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
+{
+    std::unique_ptr<juce::XmlElement> xml (parameters.valueTreeState.state.createXml());
+    copyXmlToBinary (*xml, destData);
+}
+
+void API_TremoloAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+{
+    std::unique_ptr<juce::XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
+    if (xmlState != nullptr)
+        if (xmlState->hasTagName (parameters.valueTreeState.state.getType()))
+            parameters.valueTreeState.state = juce::ValueTree::fromXml (*xmlState);
+}
+
+//==============================================================================
+
+bool API_TremoloAudioProcessor::hasEditor() const
+{
+    return true; // (change this to false if you choose to not supply an editor)
+}
+
+juce::AudioProcessorEditor* API_TremoloAudioProcessor::createEditor()
+{
+    return new API_API_TremoloAudioProcessorEditor (*this);
+}
+
+//==============================================================================
+
+#ifndef JucePlugin_PreferredChannelConfigurations
+bool API_TremoloAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+{
+  #if JucePlugin_IsMidiEffect
+    ignoreUnused (layouts);
+    return true;
+  #else
+    // This is the place where you check if the layout is supported.
+    // In this template code we only support mono or stereo.
+    if (layouts.getMainOutputChannelSet() != AudioChannelSet::mono()
+     && layouts.getMainOutputChannelSet() != AudioChannelSet::stereo())
+        return false;
+
+    // This checks if the input layout matches the output layout
+   #if ! JucePlugin_IsSynth
+    if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
+        return false;
+   #endif
+
+    return true;
+  #endif
+}
+#endif
+
+//==============================================================================
+
 const juce::String API_TremoloAudioProcessor::getName() const
 {
     return JucePlugin_Name;
@@ -91,101 +217,11 @@ void API_TremoloAudioProcessor::changeProgramName (int index, const juce::String
 }
 
 //==============================================================================
-void API_TremoloAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
-{
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
-}
 
-void API_TremoloAudioProcessor::releaseResources()
-{
-    // When playback stops, you can use this as an opportunity to free up any
-    // spare memory, etc.
-}
-
-#ifndef JucePlugin_PreferredChannelConfigurations
-bool API_TremoloAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
-{
-  #if JucePlugin_IsMidiEffect
-    juce::ignoreUnused (layouts);
-    return true;
-  #else
-    // This is the place where you check if the layout is supported.
-    // In this template code we only support mono or stereo.
-    // Some plugin hosts, such as certain GarageBand versions, will only
-    // load plugins that support stereo bus layouts.
-    if (layouts.getMainOutputChannelSet() != juce::AudioChannelSet::mono()
-     && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
-        return false;
-
-    // This checks if the input layout matches the output layout
-   #if ! JucePlugin_IsSynth
-    if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
-        return false;
-   #endif
-
-    return true;
-  #endif
-}
-#endif
-
-void API_TremoloAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
-{
-    juce::ScopedNoDenormals noDenormals;
-    auto totalNumInputChannels  = getTotalNumInputChannels();
-    auto totalNumOutputChannels = getTotalNumOutputChannels();
-
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // This is here to avoid people getting screaming feedback
-    // when they first compile a plugin, but obviously you don't need to keep
-    // this code if your algorithm always overwrites all the output channels.
-    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
-
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
-    }
-}
-
-//==============================================================================
-bool API_TremoloAudioProcessor::hasEditor() const
-{
-    return true; // (change this to false if you choose to not supply an editor)
-}
-
-juce::AudioProcessorEditor* API_TremoloAudioProcessor::createEditor()
-{
-    return new API_TremoloAudioProcessorEditor (*this);
-}
-
-//==============================================================================
-void API_TremoloAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
-{
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
-}
-
-void API_TremoloAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
-{
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
-}
-
-//==============================================================================
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new API_TremoloAudioProcessor();
 }
+
+//==============================================================================
