@@ -80,6 +80,9 @@ void API_TremoloAudioProcessor::processBlock(juce::AudioSampleBuffer& buffer, ju
     }
 
     lfoPhase = phase;
+    for (int channel = numInputChannels; channel < numOutputChannels; ++channel)
+    	buffer.clear (channel, 0, numSamples);	
+	
 }
 
 float API_TremoloAudioProcessor::lfo(float phase, int waveform)
