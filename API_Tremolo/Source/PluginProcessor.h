@@ -4,7 +4,8 @@
 
 #include "JuceHeader.h"
 #include "PluginParameter.h"
-
+#define _USE_MATH_DEFINES
+#include <math.h>
 //==============================================================================
 
 class API_TremoloAudioProcessor : public juce::AudioProcessor

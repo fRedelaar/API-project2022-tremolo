@@ -39,6 +39,13 @@ private:
 
     //======================================
 
+    juce::OwnedArray<juce::Slider> sliders;
+    juce::OwnedArray<juce::ToggleButton> toggles;
+    juce::OwnedArray<juce::ComboBox> comboBoxes;
+
+    juce::OwnedArray<juce::Label> labels;
+    juce::Array<Component*> components;
+
     typedef juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
     typedef juce::AudioProcessorValueTreeState::ButtonAttachment ButtonAttachment;
     typedef juce::AudioProcessorValueTreeState::ComboBoxAttachment ComboBoxAttachment;
@@ -46,13 +53,6 @@ private:
     juce::OwnedArray<SliderAttachment> sliderAttachments;
     juce::OwnedArray<ButtonAttachment> buttonAttachments;
     juce::OwnedArray<ComboBoxAttachment> comboBoxAttachments;
-
-    juce::OwnedArray<juce::Slider> sliders;
-    juce::OwnedArray<juce::ToggleButton> toggles;
-    juce::OwnedArray<juce::ComboBox> comboBoxes;
-
-    juce::OwnedArray<juce::Label> labels;
-    juce::Array<Component*> components;
 
     //==============================================================================
 

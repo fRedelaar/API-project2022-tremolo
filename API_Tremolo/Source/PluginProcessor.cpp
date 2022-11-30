@@ -3,8 +3,6 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "PluginParameter.h"
-#define _USE_MATH_DEFINES
-#include <math.h>
 
 API_TremoloAudioProcessor::API_TremoloAudioProcessor():
 #ifndef JucePlugin_PreferredChannelConfigurations
