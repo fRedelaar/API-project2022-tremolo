@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio Version 17
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "API_Tremolo - Standalone Plugin", "API_Tremolo_StandalonePlugin.vcxproj", "{A3DAD124-239A-21ED-3660-67190D2B6D32}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8055EDD7-904E-D5C6-D0D9-EA11C7B794AE} = {8055EDD7-904E-D5C6-D0D9-EA11C7B794AE}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "API_Tremolo - VST", "API_Tremolo_VST.vcxproj", "{2E926450-2022-5048-70BC-6D635A908234}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8055EDD7-904E-D5C6-D0D9-EA11C7B794AE} = {8055EDD7-904E-D5C6-D0D9-EA11C7B794AE}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "API_Tremolo - VST3", "API_Tremolo_VST3.vcxproj", "{8A770C0A-E7B6-0660-3F00-63E61D148E8F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8055EDD7-904E-D5C6-D0D9-EA11C7B794AE} = {8055EDD7-904E-D5C6-D0D9-EA11C7B794AE}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "API_Tremolo - Shared Code", "API_Tremolo_SharedCode.vcxproj", "{8055EDD7-904E-D5C6-D0D9-EA11C7B794AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E926450-2022-5048-70BC-6D635A908234}.Debug|x64.ActiveCfg = Debug|x64
+		{2E926450-2022-5048-70BC-6D635A908234}.Debug|x64.Build.0 = Debug|x64
+		{2E926450-2022-5048-70BC-6D635A908234}.Release|x64.ActiveCfg = Release|x64
+		{2E926450-2022-5048-70BC-6D635A908234}.Release|x64.Build.0 = Release|x64
+		{8A770C0A-E7B6-0660-3F00-63E61D148E8F}.Debug|x64.ActiveCfg = Debug|x64
+		{8A770C0A-E7B6-0660-3F00-63E61D148E8F}.Debug|x64.Build.0 = Debug|x64
+		{8A770C0A-E7B6-0660-3F00-63E61D148E8F}.Release|x64.ActiveCfg = Release|x64
+		{8A770C0A-E7B6-0660-3F00-63E61D148E8F}.Release|x64.Build.0 = Release|x64
+		{A3DAD124-239A-21ED-3660-67190D2B6D32}.Debug|x64.ActiveCfg = Debug|x64
+		{A3DAD124-239A-21ED-3660-67190D2B6D32}.Debug|x64.Build.0 = Debug|x64
+		{A3DAD124-239A-21ED-3660-67190D2B6D32}.Release|x64.ActiveCfg = Release|x64
+		{A3DAD124-239A-21ED-3660-67190D2B6D32}.Release|x64.Build.0 = Release|x64
+		{8055EDD7-904E-D5C6-D0D9-EA11C7B794AE}.Debug|x64.ActiveCfg = Debug|x64
+		{8055EDD7-904E-D5C6-D0D9-EA11C7B794AE}.Debug|x64.Build.0 = Debug|x64
+		{8055EDD7-904E-D5C6-D0D9-EA11C7B794AE}.Release|x64.ActiveCfg = Release|x64
+		{8055EDD7-904E-D5C6-D0D9-EA11C7B794AE}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
