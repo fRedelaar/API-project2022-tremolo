@@ -1,0 +1,2 @@
+﻿  include_juce_audio_plugin_client_VST3.cpp
+LINK : fatal error LNK1104: cannot open file 'API_Tremolo.lib'

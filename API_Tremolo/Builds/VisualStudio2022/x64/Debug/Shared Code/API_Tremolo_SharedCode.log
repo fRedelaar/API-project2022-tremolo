@@ -1,0 +1,28 @@
+﻿  PluginProcessor.cpp
+  PluginEditor.cpp
+  include_juce_analytics.cpp
+  include_juce_audio_basics.cpp
+  include_juce_audio_devices.cpp
+  include_juce_audio_formats.cpp
+  include_juce_audio_plugin_client_ARA.cpp
+  include_juce_audio_plugin_client_utils.cpp
+  include_juce_audio_processors_ara.cpp
+  include_juce_audio_processors_lv2_libs.cpp
+  include_juce_audio_utils.cpp
+  include_juce_box2d.cpp
+  include_juce_core.cpp
+  include_juce_cryptography.cpp
+  include_juce_data_structures.cpp
+  include_juce_dsp.cpp
+  include_juce_events.cpp
+  include_juce_graphics.cpp
+  include_juce_gui_extra.cpp
+  include_juce_opengl.cpp
+  include_juce_osc.cpp
+  include_juce_product_unlocking.cpp
+  include_juce_video.cpp
+  include_roli_blocks_basics.cpp
+C:\JUCE\modules\roli_blocks_basics\blocks\roli_BlockConfigId.h(24,1): error C2429: language feature 'nested-namespace-definition' requires compiler flag '/std:c++17' (compiling source file ..\..\Source\PluginProcessor.cpp)
+C:\JUCE\modules\roli_blocks_basics\blocks\roli_BlockConfigId.h(24,1): error C2429: language feature 'nested-namespace-definition' requires compiler flag '/std:c++17' (compiling source file ..\..\JuceLibraryCode\include_roli_blocks_basics.cpp)
+C:\JUCE\modules\roli_blocks_basics\blocks\roli_BlockConfigId.h(24,1): error C2429: language feature 'nested-namespace-definition' requires compiler flag '/std:c++17' (compiling source file ..\..\Source\PluginEditor.cpp)
+C:\JUCE\modules\roli_blocks_basics\blocks\roli_BlockConfigManager.h(298,21): error C2429: language feature 'structured bindings' requires compiler flag '/std:c++17' (compiling source file ..\..\JuceLibraryCode\include_roli_blocks_basics.cpp)
