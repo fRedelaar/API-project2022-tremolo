@@ -6,7 +6,8 @@ This repository contains code for the Seminar Audio Processing and Indexing 2022
 Some audio samples before and after the effect can be found here [TO DO]. This project is built using C++ with the [JUCE framework](https://github.com/juce-framework/JUCE).
 
 ## Screenshot
-TODO
+![Plugin made by our team](https://github.com/fRedelaar/audiostuff/blob/main/plugin-team.PNG?raw=true)
+
 
 ## Getting Started
 
