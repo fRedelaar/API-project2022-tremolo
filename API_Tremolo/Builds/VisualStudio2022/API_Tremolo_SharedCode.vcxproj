@@ -2702,6 +2702,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\roli_blocks_basics\roli_blocks_basics.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp" />
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_analytics.cpp" />
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp" />
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_devices.cpp" />
@@ -3816,10 +3817,12 @@
     <ClInclude Include="..\..\JuceLibraryCode\modules\roli_blocks_basics\visualisers\roli_BitmapLEDProgram.h" />
     <ClInclude Include="..\..\JuceLibraryCode\modules\roli_blocks_basics\visualisers\roli_DrumPadLEDProgram.h" />
     <ClInclude Include="..\..\JuceLibraryCode\modules\roli_blocks_basics\roli_blocks_basics.h" />
+    <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h" />
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h" />
     <ClInclude Include="..\..\JuceLibraryCode\JucePluginDefines.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="background.png" />
     <None Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt" />
     <None Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\README.md" />
     <None Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_formats\codecs\flac\Flac Licence.txt" />

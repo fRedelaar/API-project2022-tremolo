@@ -72,6 +72,9 @@ API_TremoloAudioProcessorEditor::API_TremoloAudioProcessorEditor (API_TremoloAud
             labels.add (aLabel = new juce::Label (parameter->name, parameter->name));
             aLabel->attachToComponent (components.getLast(), true);
             aLabel->setColour(juce::Label::textColourId, juce::Colours::white);
+			//align label to the left
+			aLabel->setJustificationType(juce::Justification::left);
+			
             addAndMakeVisible (aLabel);
 
             components.getLast()->setName (parameter->name);
@@ -83,7 +86,7 @@ API_TremoloAudioProcessorEditor::API_TremoloAudioProcessorEditor (API_TremoloAud
     //======================================
 
     editorHeight += components.size() * editorPadding;
-    setSize (editorWidth, editorHeight);
+    setSize (editorWidth, editorHeight + 60);
 }
 
 API_TremoloAudioProcessorEditor::~API_TremoloAudioProcessorEditor()
@@ -97,6 +100,9 @@ void API_TremoloAudioProcessorEditor::paint (juce::Graphics& g)
     g.fillAll(juce::Colour(0, 17, 88));
     // g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
     getLookAndFeel().setColour(juce::Slider::thumbColourId, juce::Colour (140, 140, 200)); // Leiden color
+
+	juce::Image background = juce::ImageCache::getFromMemory(BinaryData::background_png, BinaryData::background_pngSize);
+    g.drawImageAt(background, 0, 0);
 }
 
 void API_TremoloAudioProcessorEditor::resized()
