@@ -25,16 +25,17 @@ private:
     API_TremoloAudioProcessor& processor;
 
     enum {
-        editorWidth = 500,
-        editorMargin = 10,
-        editorPadding = 10,
+        editorWidth = 700,
+        editorMargin = 80,
+        editorPadding = 20,
 
         sliderTextEntryBoxWidth = 100,
-        sliderTextEntryBoxHeight = 25,
-        sliderHeight = 25,
+        sliderTextEntryBoxHeight = 45,
+        sliderHeight = 45,
         buttonHeight = 25,
-        comboBoxHeight = 25,
+        comboBoxHeight = 45,
         labelWidth = 100,
+        labelHeight = 30,
     };
 
     //======================================

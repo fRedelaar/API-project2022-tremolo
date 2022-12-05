@@ -20,7 +20,7 @@ API_TremoloAudioProcessorEditor::API_TremoloAudioProcessorEditor (API_TremoloAud
                 juce::Slider* aSlider;
                 sliders.add (aSlider = new juce::Slider());
                 aSlider->setTextValueSuffix (parameter->label);
-                aSlider->setTextBoxStyle (juce::Slider::TextBoxLeft,
+                aSlider->setTextBoxStyle (juce::Slider::TextBoxBelow,
                                           false,
                                           sliderTextEntryBoxWidth,
                                           sliderTextEntryBoxHeight);
@@ -56,7 +56,7 @@ API_TremoloAudioProcessorEditor::API_TremoloAudioProcessorEditor (API_TremoloAud
                 aComboBox->setEditableText (false);
                 aComboBox->setJustificationType (juce::Justification::left);
                 aComboBox->addItemList (processor.parameters.comboBoxItemLists[comboBoxCounter++], 1);
-
+                
                 ComboBoxAttachment* aComboBoxAttachment;
                 comboBoxAttachments.add (aComboBoxAttachment =
                     new ComboBoxAttachment (processor.parameters.apvts, parameter->paramID, *aComboBox));
@@ -70,6 +70,7 @@ API_TremoloAudioProcessorEditor::API_TremoloAudioProcessorEditor (API_TremoloAud
             juce::Label* aLabel;
             labels.add (aLabel = new juce::Label (parameter->name, parameter->name));
             aLabel->attachToComponent (components.getLast(), true);
+            aLabel->setColour(juce::Label::textColourId, juce::Colours::white);
             addAndMakeVisible (aLabel);
 
             components.getLast()->setName (parameter->name);
@@ -92,7 +93,9 @@ API_TremoloAudioProcessorEditor::~API_TremoloAudioProcessorEditor()
 
 void API_TremoloAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    g.fillAll(juce::Colour(0, 17, 88));
+    // g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    getLookAndFeel().setColour(juce::Slider::thumbColourId, juce::Colour (140, 140, 200)); // Leiden color
 }
 
 void API_TremoloAudioProcessorEditor::resized()
