@@ -31,7 +31,7 @@ private:
 
         sliderTextEntryBoxWidth = 100,
         sliderTextEntryBoxHeight = 45,
-        sliderHeight = 45,
+        sliderHeight = 180,
         buttonHeight = 25,
         comboBoxHeight = 45,
         labelWidth = 100,

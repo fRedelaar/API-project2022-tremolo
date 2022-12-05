@@ -24,6 +24,7 @@ API_TremoloAudioProcessorEditor::API_TremoloAudioProcessorEditor (API_TremoloAud
                                           false,
                                           sliderTextEntryBoxWidth,
                                           sliderTextEntryBoxHeight);
+                aSlider->setSliderStyle(juce::Slider::Rotary);
 
                 SliderAttachment* aSliderAttachment;
                 sliderAttachments.add (aSliderAttachment =
