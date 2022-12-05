@@ -99,7 +99,7 @@ void API_TremoloAudioProcessorEditor::paint (juce::Graphics& g)
 {
     g.fillAll(juce::Colour(0, 17, 88));
     // g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-    getLookAndFeel().setColour(juce::Slider::thumbColourId, juce::Colour (140, 140, 200)); // Leiden color
+    getLookAndFeel().setColour(juce::Slider::thumbColourId, juce::Colour (255, 255, 255)); // white color
 
 	juce::Image background = juce::ImageCache::getFromMemory(BinaryData::background_png, BinaryData::background_pngSize);
     g.drawImageAt(background, 0, 0);
