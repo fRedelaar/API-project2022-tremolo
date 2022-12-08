@@ -67,7 +67,10 @@ The plugin can also be found as .dll file named "API_Tremolo.dll" here:
 ### Troubleshooting
 * Make sure to have C++ as language standard in visual studios 2022. This can be configured by right mouse click on the folder "API_Tremelo_SharedCode" in the solution explorer in visual studios. Then, In Configuration Properties > General, the C++ Language standard can be adjusted. 
 
-* The SDK must be selected **[MICHAEL TO DO]**
+* Make sure that the global path points towards the SDK you have installed. This can be done by opening the JUCE application, press "file" at the top left and go to "global paths". Here, under "VST (Legacy) SDK, set the correct path to the root folder for VST2 in your local files. In our case, this corresponds to: Windows (C:) > JUCE > VST2_SDK.
+
+* When building the project, if it shows an error like the following: aeffectx.h file not found, we found the following workaround: In Visual Studio, in the solution explorer, right click on the project > properties > VC++ directories. Then under "include directories" press the arrow on the right and press "edit" and press "new line". Then select the path that leads to this root folder of the SDK: VST_SDK\VST2_SDK, which is probably part of your project folder.
+
 ## Built With
 
   - [JUCE framework](https://github.com/juce-framework/JUCE)
