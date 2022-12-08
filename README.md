@@ -3,7 +3,7 @@
 
 This repository contains code for the Seminar Audio Processing and Indexing 2022/2023 project at Leiden University. For this project we have created a virtual Tremolo audio effect that can be used for digital audio workstations (DAW) such as FL studio. 
 
-Some audio samples before and after the effect can be [found here](https://fredelaar.github.io/API-project2022-tremolo/). This project is built using C++ with the [JUCE framework](https://github.com/juce-framework/JUCE).
+Some audio samples before and after applying the effect can be [found here](https://fredelaar.github.io/API-project2022-tremolo/). This project is built using C++ with the [JUCE framework](https://github.com/juce-framework/JUCE).
 
 ## Screenshot
 ![Plugin made by our team](plugin-team.PNG?raw=true)
