@@ -66,10 +66,10 @@ The plugin can also be found as .dll file named "API_Tremolo.dll" here:
 3. Using your DAW's plugin manager you can now locate the folder you have just created which includes the API_Tremolo.dll
 
 Please refer to your DAW's help pages on how ot use the Plugin Manager:
-[FL Studio](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/basics_externalplugins.htm )
-[Ableton](https://help.ableton.com/hc/en-us/articles/209071729-Using-VST-plug-ins-on-Windows) (differs for your platform)
-[Cubase](https://steinberg.help/cubase_pro/v10.5/en/cubase_nuendo/topics/installing_and_managing_plugins/installing_and_managing_plugins_plugin_manager_installing_vst_plugins_c.html)
-[Logic Pro](https://support.apple.com/guide/logicpro/use-the-plug-in-manager-lgcp9e26ef17/mac) (Only possible if you are on mac and build the repo yourself)
+- [FL Studio](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/basics_externalplugins.htm )
+- [Ableton](https://help.ableton.com/hc/en-us/articles/209071729-Using-VST-plug-ins-on-Windows) (differs for your platform)
+- [Cubase](https://steinberg.help/cubase_pro/v10.5/en/cubase_nuendo/topics/installing_and_managing_plugins/installing_and_managing_plugins_plugin_manager_installing_vst_plugins_c.html)
+- [Logic Pro](https://support.apple.com/guide/logicpro/use-the-plug-in-manager-lgcp9e26ef17/mac) (Only possible if you are on mac and build the repo yourself)
 
 
 
@@ -91,15 +91,3 @@ Please refer to your DAW's help pages on how ot use the Plugin Manager:
   - [Jesse de Gans](https://github.com/jessedegans)
   - [Felicia Redelaar](https://github.com/fRedelaar)
   - [Michael de Rooij](https://github.com/michaael2000)
-
-
-
-<!---
-## License (if possible)
-
-This project is licensed under the [CC0 1.0 Universal](LICENSE.md) Creative Commons License - see the [LICENSE.md] LICENSE.md) file for details
-
-## Acknowledgments (if possible)
-
-  - Hat tip to anyone whose code is used
--->
