@@ -13,6 +13,7 @@ Some audio samples before and after applying the effect can be [found here](http
 
 To get started and use the Tremolo VST, you should download the project as a ZIP or clone the project. You should also have installed a DAW on your computer such as FL studio. A fully-functional, free trial version with unlimited time for FL Studio can be found [here](https://www.image-line.com/fl-studio-download/). The download is available for Windows 8, 10 or 11, and MacOS 10.13.6 (High Sierra) or later.
 
+If you choose to build the plugin from the repository, you will need to have the necessary development tools and dependencies installed on your computer.
 
 ### Prerequisites
 
@@ -59,9 +60,17 @@ The plugin can also be found as .dll file named "API_Tremolo.dll" here:
 ```API_Tremolo/Builds/VisualStudio2022/x64/Debug/VST```
 
 
-### Running the audio plugin in a DAW like FL Studio
-1. Open FL Studio
-2. **[... JESSE TO DO ...]** 
+### Running the audio plugin in your DAW
+1. To run our audio plugin in a digital audio workstation (DAW), you can either build the plugin from our GitHub repository or download a pre-built release.
+2. Create a directory for the plugin and copy the API_Tremolo.dll into it.
+3. Using your DAW's plugin manager you can now locate the folder you have just created which includes the API_Tremolo.dll
+
+Please refer to your DAW's help pages on how ot use the Plugin Manager:
+[FL Studio](https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/basics_externalplugins.htm )
+[Ableton](https://help.ableton.com/hc/en-us/articles/209071729-Using-VST-plug-ins-on-Windows) (differs for your platform)
+[Cubase](https://steinberg.help/cubase_pro/v10.5/en/cubase_nuendo/topics/installing_and_managing_plugins/installing_and_managing_plugins_plugin_manager_installing_vst_plugins_c.html)
+[Logic Pro](https://support.apple.com/guide/logicpro/use-the-plug-in-manager-lgcp9e26ef17/mac) (Only possible if you are on mac and build the repo yourself)
+
 
 
 ### Troubleshooting
